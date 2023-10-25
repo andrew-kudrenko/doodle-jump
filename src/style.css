@@ -1,0 +1,12 @@
+:root {
+  /* background-color: rgb(50, 50, 55); */
+}
+
+.game-area {
+  position: relative;
+}
+
+.game-area > .game-canvas {
+  position: absolute;
+  border: 2px solid rgba(180, 34, 146);
+}
