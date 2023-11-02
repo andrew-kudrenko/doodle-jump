@@ -11,6 +11,25 @@ export class Collider {
     this.entities.delete(entity);
   }
 
+  public hasAnyCollision(a: BaseEntity) {
+    for (const b of this.entities) {
+      if (
+        Collider.isInsideLeftBottomCorner(a, b) ||
+        Collider.isInsideRightBottomCorner(a, b) ||
+        Collider.isInsideLeftTopCorner(a, b) ||
+        Collider.isInsideRightTopCorner(a, b) ||
+        Collider.isInsideLeftTopCorner(b, a) ||
+        Collider.isInsideRightTopCorner(b, a) ||
+        Collider.isInsideLeftTopCorner(b, a) ||
+        Collider.isInsideRightTopCorner(b, a)
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public hasBottomToTopCollisions(a: BaseEntity) {
     for (const b of this.entities) {
       if (
@@ -43,14 +62,14 @@ export class Collider {
   }
 
   private static isInsideByX(entity: BaseEntity, x: number) {
-    const coord = entity.coords.x + entity.collisionFrame.x;
+    const start = entity.coords.x + entity.collisionFrame.x;
 
-    return x >= coord && x <= coord + entity.collisionFrame.width;
+    return x >= start && x <= start + entity.collisionFrame.width;
   }
 
   private static isInsideByY(entity: BaseEntity, y: number) {
-    const coord = entity.coords.y + entity.collisionFrame.y;
+    const start = entity.coords.y + entity.collisionFrame.y;
 
-    return y >= coord && y <= coord + entity.collisionFrame.height;
+    return y >= start && y <= start + entity.collisionFrame.height;
   }
 }
